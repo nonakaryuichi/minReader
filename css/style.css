@@ -1,0 +1,227 @@
+html
+{
+        background:url(../image/background.png) #fafafa;
+}
+
+/* *******************
+ * Classes
+ * **************** */
+.maxSize
+{
+        width:820px;
+}
+
+
+/* *******************
+ * Styles
+ * **************** */
+#header
+{
+        margin:0 auto;
+}
+        #header h1
+        {
+                margin:50px 0 0 0;
+
+                font-size:400%;
+                font-family: 'Mr De Haviland', cursive; 
+
+                color:#444;
+                text-shadow:1px 1px 0 #fff;
+        }
+
+#continer
+{
+        margin:0 auto;
+}
+        #continer #feedList
+        {
+                margin:20px 0 0 0;
+                padding:0 0 0 40px;
+        }
+                #continer #feedList li
+                {
+                        float:left;
+                        margin:40px 40px 0 0;
+                        width:115px;
+                        height:160px;
+
+                        list-style:none;
+                }
+                        #continer #feedList li a
+                        {
+                                position:relative;
+                                display:block;
+                                margin:0;
+                                padding:30px 15px 20px 15px;
+                                width:85px;
+                                height:110px;
+                                border-radius:5px;
+
+                                color:#666;
+                                font-size:80%;
+                                text-shadow:1px 1px 0 #fff;
+                                line-height:150%;
+                                font-weight:600;
+                                text-shadow:1px 1px 0 #fff;
+                                text-decoration:none;
+
+                                background:url(../image/paper.png) #fafafa;
+                                box-shadow:inset 0 1px 0 #fff,0px 1px 7px #ccc;
+
+                        }
+                        #continer #feedList li a:hover
+                        {
+                                padding:27px 12px 17px 12px;
+                                border:3px solid #84c9da;
+
+                                color:#333;
+
+                                box-shadow:inset 0 1px 0 #fff, 0 1px 15px #bbb;
+                        }
+                        #continer #feedList li a:before,
+                        #continer #feedList li a:after
+                        {
+                                content:"";
+                                position:absolute;
+                                display:block;
+                                left:0;
+                                top:0;
+                                margin:0;
+                                padding:30px 20px 20px 20px;
+                                width:75px;
+                                height:110px;
+                                border-radius:5px;
+
+                                color:#666;
+                                text-shadow:1px 1px 0 #fff;
+                                text-decoration:none;
+
+                                -webkit-transform: rotate(-5deg);
+                                -moz-transform: rotate(-5deg);
+                                -o-transform: rotate(-5deg);
+                                -ms-transform: rotate(-5deg);
+                                transform: rotate(-5deg);
+
+                                background:url(../image/paper.png) #fafafa;
+                                box-shadow:inset 0 1px 0 #fff,0px 1px 7px #ccc;
+
+                                z-index:-100;
+                        }
+                        #continer #feedList li a:after
+                        {
+                                -webkit-transform: rotate(9deg);
+                                -moz-transform: rotate(9deg);
+                                -o-transform: rotate(9deg);
+                                -ms-transform: rotate(9deg);
+                                transform: rotate(9deg);
+                        }
+        #continer #feedContiner
+        {
+                
+        }
+                #continer #feedContiner .feedTitle
+                {
+                        margin:100px 0 -160px 0;
+
+                        color:#333;
+                        text-shadow:1px 1px 0 #fff;
+                        line-height:150%;
+                        font-size:120%;
+                        font-weight:bold;
+                }
+                #continer #feedContiner .article
+                {
+                        margin:200px 0 0 0;
+                        padding:1px 0 50px 0;
+
+                        border-radius:3px;
+
+                        background:url(../image/paper.png) #fafafa;
+                        box-shadow:inset 0 1px 0 #fff,0px 1px 5px #ccc;
+                }
+                        #continer #feedContiner .article .title
+                        {
+                                margin:80px 60px 0 60px;
+
+                                color:#333;
+                                line-height:150%;
+                                font-size:190%;
+                                font-weight:bold;
+                                text-shadow:1px 1px 0 #fff;
+                        }
+                        #continer #feedContiner .article .time
+                        {
+                                margin:20px 60px 0 60px;
+
+                                color:#888;
+                                font-size:90%;
+                                text-shadow:1px 1px 0 #fff;
+                        }
+                        #continer #feedContiner .article .content
+                        {
+                                margin:50px 60px 0 60px;
+
+                                color:#666;
+                                font-size:115%;
+                                line-height:180%;
+                                text-shadow:1px 1px 0 #fff;
+                        }
+                                #continer #feedContiner .article .content h2
+                                {
+                                        margin:2em 0 0 0;
+
+                                        font-size:140%;
+                                        color:#333;
+                                }
+                                #continer #feedContiner .article .content a
+                                {
+                                        color:#84c9da;
+                                        text-shadow:1px 1px 0 #fff;
+                                        text-decoration:none;
+                                }
+                                        #continer #feedContiner .article .content a:hover
+                                        {
+                                                text-decoration:underline;
+                                        }
+                                #continer #feedContiner .article .content p
+                                {
+                                        margin:1.5em 0 0 0;
+
+                                }
+                                #continer #feedContiner .article .content ul,
+                                #continer #feedContiner .article .content ol
+                                {
+                                        margin:1.5em 0 0 0;
+                                        list-style:inside;
+                                }
+                        #continer #feedContiner .article .link
+                        {
+                                margin:40px 60px 0 60px;
+
+                                text-align:right;
+                                line-height:170%;
+                        }
+                                #continer #feedContiner .article .link a
+                                {
+                                        color:#aaa;
+                                        text-shadow:1px 1px 0 #fff;
+                                }
+
+#footer
+{
+        margin:100px 0 0 0;
+        padding:0;
+}
+        #footer #copyright
+        {
+                padding:0 5px 10px 5px;
+                text-align:right;
+        }
+                #footer #copyright a
+                {
+                        color:#aaa;
+                        text-shadow:1px 1px 0 #fff;
+                        text-decoration:none;
+                }
+
