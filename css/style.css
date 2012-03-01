@@ -42,13 +42,54 @@ html
                 #continer #feedList li
                 {
                         float:left;
+			position:relative;
                         margin:40px 40px 0 0;
                         width:115px;
                         height:160px;
 
                         list-style:none;
                 }
-                        #continer #feedList li a
+			#continer #feedList li .delete
+			{
+				display:none;
+				position:absolute;
+				z-index:100;
+				top:-7px;
+				right:-7px;
+				width:14px;
+				height:14px;
+				border:2px solid #fff;
+
+				-webkit-border-radius:8px;
+				-moz-border-radius:8px;
+				border-radius:8px;
+
+				color:#fff;
+				text-align:center;
+				text-shadow:-1px -1px 0 #bb0000;
+				text-decoration:none;
+				line-height:92%;
+
+				-webkit-box-shadow:inset 0 0 3px #aa0000, 0 1px 4px #bbb;
+				-moz-box-shadow:inset 0 0 3px #aa0000, 0 1px 4px #bbb;
+				box-shadow:inset 0 0 3px #aa0000, 0 1px 4px #bbb;
+				background         :#cc0000;
+                                background         : -moz-linear-gradient(top, #dd0000, #cc0000);
+		                background         : -webkit-gradient(linear, 0% 0%, 0% 100%, from(#dd0000), to(#cc0000));
+		                background         : gradient(linear, 0% 0%, 0% 100%, from(#dd0000), to(#cc0000));
+			}
+			#continer #feedList li:hover .delete
+			{
+				display:block;
+			}
+			#continer #feedList li:hover .delete:hover
+			{
+				background         :#dd0000;
+                                background         : -moz-linear-gradient(top, #cc0000, #dd0000);
+		                background         : -webkit-gradient(linear, 0% 0%, 0% 100%, from(#cc0000), to(#dd0000));
+		                background         : gradient(linear, 0% 0%, 0% 100%, from(#cc0000), to(#dd0000));
+			}
+                        #continer #feedList li .selector
                         {
                                 position:relative;
                                 display:block;
@@ -70,7 +111,7 @@ html
                                 box-shadow:inset 0 1px 0 #fff,0px 1px 7px #ccc;
 
                         }
-                        #continer #feedList li a:hover
+                        #continer #feedList li .selector:hover
                         {
                                 padding:27px 12px 17px 12px;
                                 border:3px solid #84c9da;
@@ -79,8 +120,8 @@ html
 
                                 box-shadow:inset 0 1px 0 #fff, 0 1px 15px #bbb;
                         }
-                        #continer #feedList li a:before,
-                        #continer #feedList li a:after
+                        #continer #feedList li .selector:before,
+                        #continer #feedList li .selector:after
                         {
                                 content:"";
                                 position:absolute;
@@ -108,7 +149,7 @@ html
 
                                 z-index:-100;
                         }
-                        #continer #feedList li a:after
+                        #continer #feedList li .selector:after
                         {
                                 -webkit-transform: rotate(9deg);
                                 -moz-transform: rotate(9deg);

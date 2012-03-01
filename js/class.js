@@ -62,7 +62,6 @@ App.minReader.prototype.loaderChecker = function(){
 	}
 
 	setTimeout(function(){
-		console.log("load");
 		method.loaderChecker();
 	},100);
 }
@@ -88,7 +87,6 @@ App.minReader.prototype.loader = function(){
 				data.feedUrl     = result.feed.feedUrl;
 				data.url         = result.feed.link;
 				data.items       = result.feed.entries;
-				console.log(data);
 				method.addArticles(0, data);
 			} else {
 				alert("Error");
@@ -110,16 +108,25 @@ App.minReader.prototype.feedCounter = function(){
 App.minReader.prototype.viewFeedList = function(){
 	var articles = this.storage.articles();
 	var feeds = this.storage.feeds();
-	console.log(feeds);
-	console.log(this.storage.articles());
+	var $feedList = $("#feedList");
+
+	$feedList.find("*").remove();
+
 	for(var i in articles){
 		var feed = articles[i];
-		console.log(feed);
-		$("#feedList").append(
+		$feedList.append(
 			$("<li>")
 				.addClass("item")
 				.append(
 					$("<a>")
+						.addClass("delete")
+						.attr("href", "javascript:void(0)")
+						.data("feedid", i)
+						.html("×")
+				)
+				.append(
+					$("<a>")
+						.addClass("selector")
 						.attr("href", "javascript:void(0)")
 						.data("feedlink", feed['feedUrl'])
 						.html(feed['title'])
@@ -135,16 +142,22 @@ App.minReader.prototype.model = function(names){
 	var articles;
 
 	return {
-		feeds: function(d){
+		feeds: function(d, callback){
 			if(d){
 				feeds = d;
 				localStorage[names.storage.feeds] = $.stringify(feeds);
 			}
+			if(callback){
+				callback();
+			}
 			return feeds;
 		},
-		articles: function(d){
+		articles: function(d, callback){
 			if(d){
 				articles = d;
+			}
+			if(callback){
+				callback();
 			}
 			return articles;
 		}
@@ -163,11 +176,17 @@ App.minReader.prototype.addFeeds = function(key, data){
 }
 
 //remove Feeds
-App.minReader.prototype.removeFeeds = function(key){
+App.minReader.prototype.removeFeeds = function(key,callback){
 	var feeds =  this.storage.feeds();
 	delete feeds[key];
 
-	this.storage.feeds(feeds);
+	this.storage.feeds(feeds,function(){
+		if(callback){
+			callback();
+		}
+	});
+	
+	
 }
 
 
@@ -181,7 +200,6 @@ App.minReader.prototype.addArticles = function(key, data){
 	}
 
 	this.storage.articles(articles);
-	console.log(articles.length);
 }
 
 //remove Articles
@@ -250,7 +268,6 @@ function initialize(feedURL) {
 												.click(function(){
 													var $this = $(this);
 													var $body = $("#feedItem" + $this.data("feedid"));
-													console.log($body);
 													$body.load($this.data("readmore"));
 												})
 										)
@@ -291,11 +308,20 @@ google.setOnLoadCallback(function(){
 	var minReader = new App.minReader();
 	minReader.init();
 
-	$("#feedList li a").live('click',function(){
+	$("#feedList li .selector").live('click',function(){
 		$this = $(this);
 
 		//drow
 		initialize($this.data('feedlink'));
+	});
+
+	$("#feedList li .delete").live('click',function(){
+		$this = $(this);
+
+		//drow
+		minReader.removeFeeds($this.data('feedid'),function(){
+			minReader.viewFeedList();
+		});
 	});
 	
 });
