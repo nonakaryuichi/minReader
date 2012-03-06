@@ -15,20 +15,30 @@ html
 /* *******************
  * Styles
  * **************** */
-#header
+#splashScreen
 {
-        margin:0 auto;
+	position:absolute;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+
+	color:#222;
+	font-size:400%;
+	text-shadow:-1px -1px 0 #000;
+
+	background:#111;
+
+	z-index:2000;
 }
-        #header h1
-        {
-                margin:50px 0 0 0;
+	#splashScreen .inner
+	{
+		position:absolute;
+		top:50%;
+		margin:0 auto;
 
-                font-size:400%;
-                font-family: 'Mr De Haviland', cursive; 
-
-                color:#444;
-                text-shadow:1px 1px 0 #fff;
-        }
+		text-align:center;
+	}
 
 #continer
 {
@@ -36,8 +46,14 @@ html
 }
         #continer #feedList
         {
+		overflow:hidden;
+		position:fixed;
+		top:0;
+		bottom:0;
+		left:0;
                 margin:20px 0 0 0;
                 padding:0 0 0 40px;
+		width:200px;
         }
                 #continer #feedList li
                 {
@@ -241,18 +257,35 @@ html
                         }
         #continer #feedContiner
         {
-                
+                position:absolute;
+		top:0;
+		bottom:0;
+		left:280px;
+		right:120px;
+
         }
                 #continer #feedContiner .feedTitle
                 {
-                        margin:100px 0 -160px 0;
+                        margin:50px 0 0 0;
 
-                        color:#333;
+                        color:#bbb;
                         text-shadow:1px 1px 0 #fff;
-                        line-height:150%;
-                        font-size:120%;
+                        line-height:140%;
+                        font-size:200%;
                         font-weight:bold;
                 }
+		#continer #feedContiner .feedUrl
+		{
+			margin:5px 0 -160px 0;
+		}
+			#continer #feedContiner .feedUrl a
+			{
+				color:#bbb;
+				text-shadow:1px 1px 0 #fff;
+				line-height:100%;
+				font-size:100%;
+				text-decoration:none;
+			}
                 #continer #feedContiner .article
                 {
                         margin:200px 0 0 0;
@@ -333,7 +366,11 @@ html
 
 #footer
 {
-        margin:100px 0 0 0;
+	position:fixed;
+	left:0;
+	right:0;
+	bottom:0;
+        margin:0;
         padding:0;
 }
         #footer #copyright

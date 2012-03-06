@@ -139,6 +139,7 @@ App.minReader.prototype.loaderChecker = function(){
 
 	if(feeds.length === articles.length){
 		method.viewFeedList();
+		$("#splashScreen").delay(2000).fadeOut(300);
 		return;
 	}
 
@@ -322,7 +323,6 @@ App.minReader.prototype.viewFeed = function(feedURL){
 	//var & reset
 	var $continer = $("#feedContiner");
 	$continer.find("*").remove();
-
 	//entry title
 	$continer.append(
 		$("<h2>")
@@ -333,6 +333,15 @@ App.minReader.prototype.viewFeed = function(feedURL){
 				$("<span>")
 					.addClass("count")
 					.html("（" + feed.items.length + "）")
+			)
+	)
+	.append(
+		$("<p>")
+			.addClass("feedUrl")
+			.append(
+				$("<a>")
+					.attr("href", feed.url)
+					.html(feed.url)
 			)
 	);
 
