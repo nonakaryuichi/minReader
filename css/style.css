@@ -27,17 +27,24 @@ html
 	font-size:400%;
 	text-shadow:-1px -1px 0 #000;
 
-	background:#111;
+	background:url(../image/splashscreen.png);
 
 	z-index:2000;
 }
-	#splashScreen .inner
+	#splashScreen h1
 	{
+                overflow:hidden;
 		position:absolute;
-		top:50%;
-		margin:0 auto;
+		top:45%;
+		left:20%;
+                width:300px;
+                height:130px;
 
+                text-indent:-9999px;
+                text-decoration:none;
 		text-align:center;
+
+                background: url(../image/logo.png) no-repeat;
 	}
 
 #continer
@@ -191,24 +198,60 @@ html
                                 position:relative;
                                 display:block;
                                 margin:0;
-                                padding:30px 15px 20px 15px;
+                                padding:27px 12px 17px 12px;
+                                border:3px solid #fff;
                                 width:85px;
                                 height:110px;
                                 border-radius:5px;
 
-                                color:#666;
-                                font-size:80%;
-                                text-shadow:1px 1px 0 #fff;
-                                line-height:150%;
-                                font-weight:600;
-                                text-shadow:1px 1px 0 #fff;
                                 text-decoration:none;
-				text-overflow: ellipsis;
 
                                 background:url(../image/paper.png) #fafafa;
+
                                 box-shadow:inset 0 1px 0 #fff,0px 1px 7px #ccc;
 
                         }
+                                #continer #feedList li .selector .title
+                                {
+                                        font-weight:bold;
+                                        color:#666;
+                                        font-size:80%;
+                                        text-shadow:1px 1px 0 #fff;
+                                        line-height:150%;
+                                        text-shadow:1px 1px 0 #fff;
+                                        text-decoration:none;
+                                        text-overflow: ellipsis;
+                                }
+                                #continer #feedList li .selector .count
+                                {
+                                        position:absolute;
+                                        display:block;
+                                        top:45%;
+                                        right:-9px;
+                                        width:30px;
+                                        padding:5px;
+
+                                        border:1px solid #aa0000;
+
+                                        color:#fff;
+                                        text-align:right;
+                                        font-size:80%;
+                                        font-weight:bold;
+                                        text-shadow:-1px -1px 0 #aa0000;
+                                        text-decoration:none;
+
+                                        background:#bb0000;
+
+                                        box-shadow:inset 1px 0 0 #cc0000,inset -1px 0 2px #bb0000 , 0 1px 3px #ccc;
+
+                                        -webkit-transition : 0.2s ease-in-out;
+                                        -moz-transition    : 0.2s ease-in-out;
+                                        transition         : 0.2s ease-in-out;
+                                }
+                                #continer #feedList li .selector:hover .count
+                                {
+                                        width:20px;
+                                }
                         #continer #feedList li .selector:hover
                         {
                                 padding:27px 12px 17px 12px;
@@ -259,10 +302,9 @@ html
         {
                 position:absolute;
 		top:0;
-		bottom:0;
 		left:280px;
 		right:120px;
-
+                padding:0 0 120px 0;
         }
                 #continer #feedContiner .feedTitle
                 {
@@ -273,7 +315,27 @@ html
                         line-height:140%;
                         font-size:200%;
                         font-weight:bold;
+                        baseline:center;
                 }
+                        #continer #feedContiner .feedTitle .count
+                        {
+                                margin:0 0 0 10px;
+                                padding:5px;
+                                -webkit-border-radius:3px;
+                                -moz-border-radius:3px;
+                                border-radius:3px;
+
+                                color:#aaa;
+                                font-size:40%;
+                                font-weight:bold;
+                                text-shadow:#fff;
+
+                                background:#fafafa;
+
+                                -webkit-box-shadow:1px 1px 0 #ddd;
+                                -moz-box-shadow:1px 1px 0 #ddd;
+                                box-shadow:1px 1px 0 #ddd;
+                        }
 		#continer #feedContiner .feedUrl
 		{
 			margin:5px 0 -160px 0;
@@ -350,6 +412,10 @@ html
                                 {
                                         margin:1.5em 0 0 0;
                                         list-style:inside;
+                                }
+                                #continer #feedContiner .article .content img
+                                {
+                                        max-width:100%;
                                 }
                         #continer #feedContiner .article .link
                         {

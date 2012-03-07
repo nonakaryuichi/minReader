@@ -29,7 +29,8 @@ App.minReader = function(){
 
 	//dom
 	this.$ = {
-		feedList : $("#feedList")
+		feedList : $("#feedList"),
+                feedContiner : $("#feedContiner")
 	}
 
 	//storage
@@ -48,7 +49,7 @@ App.minReader.prototype.controler = function(){
 		$this = $(this);
 
 		//drow
-		method.viewFeed($this.data('feedlink'));
+		method.viewFeeds($this.data('feedlink'));
 	});
 
 	//del feed
@@ -139,7 +140,7 @@ App.minReader.prototype.loaderChecker = function(){
 
 	if(feeds.length === articles.length){
 		method.viewFeedList();
-		$("#splashScreen").delay(2000).fadeOut(300);
+		$("#splashScreen").delay(5000).fadeOut(500);
 		return;
 	}
 
@@ -177,7 +178,7 @@ App.minReader.prototype.loadFeed = function(url, length){
 			data.url         = result.feed.link;
 			data.items       = result.feed.entries;
 			method.addArticles(data.feedUrl, data);
-			method.addFeedList(data.feedUrl, data.title, method.feedCounter() + 1);
+			method.addFeedList(data.feedUrl, data.title, data.items.length);
 		} else {
 			alert("load Error");
 		}
@@ -210,7 +211,16 @@ App.minReader.prototype.addFeedList = function(url, title, num){
 					.addClass("selector")
 					.attr("href", "javascript:void(0)")
 					.data("feedlink", url)
-					.html(title)
+                                        .append(
+                                                $("<span>")
+                                                        .addClass("title")
+                                                        .html(title)
+                                        )
+                                        .append(
+                                                $("<span>")
+                                                        .addClass("count")
+                                                        .html(num)
+                                        )
 			)
 				
 	);
@@ -223,10 +233,10 @@ App.minReader.prototype.viewFeedList = function(){
 	var feeds    = this.storage.feeds();
 
 	this.$.feedList.find("*").remove();
-
+        
 	for(var i in articles){
 		var feed = articles[i];
-		this.addFeedList(feed['feedUrl'], feed['title'], i);
+		this.addFeedList(feed['feedUrl'], feed['title'], feed.items.length);
 	}
 
 	//add new feed input
@@ -311,9 +321,49 @@ App.minReader.prototype.removeArticles = function(key){
 
 
 /* ------------------------
- * 
+ * view feed
  * --------------------- */
-App.minReader.prototype.viewFeed = function(feedURL){
+App.minReader.prototype.viewFeed = function(entry, num){
+        //var
+        var method = this;
+
+        //DOM chenge
+        method.$.feedContiner
+        .append(
+                $("<article>")
+                        .hide()
+                        .attr("id","feedItem" + num)
+                                .addClass("article")
+                                .append(
+                                        $("<h3>")
+                                        .html(entry.title)
+                                        .addClass("title")        
+                                )
+                                .append(
+                                        $("<time>")
+                                                .html(entry.publishedDate)
+                                                .addClass("time")
+                                                .attr("datetime",entry.publishedDate)
+                                )
+                                .append(
+                                        $("<div>")
+                                                .html(entry.content)
+                                                .addClass("content")
+                                ).append(
+                                        $("<p>")
+                                                .append(
+                                                        $("<a>")
+                                                        .attr("href",entry.link)
+                                                        .html(entry.title)
+                                                )
+                                                .addClass("link")
+                                )
+                                .delay(200 * num)
+                                .fadeIn(200)
+                );
+}
+
+App.minReader.prototype.viewFeeds = function(feedURL){
 	var method = this;
 
 	//feed
@@ -321,10 +371,9 @@ App.minReader.prototype.viewFeed = function(feedURL){
 	var feed  = feeds[feedURL];
 
 	//var & reset
-	var $continer = $("#feedContiner");
-	$continer.find("*").remove();
+	method.$.feedContiner.find("*").remove();
 	//entry title
-	$continer.append(
+	method.$.feedContiner.append(
 		$("<h2>")
 			.addClass("feedTitle")
 			.attr("title", feed.description)
@@ -332,7 +381,7 @@ App.minReader.prototype.viewFeed = function(feedURL){
 			.append(
 				$("<span>")
 					.addClass("count")
-					.html("（" + feed.items.length + "）")
+					.html(feed.items.length)
 			)
 	)
 	.append(
@@ -347,43 +396,7 @@ App.minReader.prototype.viewFeed = function(feedURL){
 
 	//feed roop
 	for (var i = 0; i < feed.items.length; i++) {
-		
-		
-		//var
-		var entry    = feed.items[i];
-		//console.log(result.feed);
-
-		//DOM chenge
-		$continer
-		.append(
-			$("<article>")
-				.attr("id","feedItem" + i)
-					.addClass("article")
-					.append(
-						$("<h3>")
-						.html(entry.title)
-						.addClass("title")        
-					)
-					.append(
-						$("<time>")
-							.html(entry.publishedDate)
-							.addClass("time")
-							.attr("datetime",entry.publishedDate)
-					)
-					.append(
-						$("<div>")
-							.html(entry.content)
-							.addClass("content")
-					).append(
-						$("<p>")
-							.append(
-								$("<a>")
-								.attr("href",entry.link)
-								.html(entry.title)
-							)
-							.addClass("link")
-					)
-			);
+                method.viewFeed(feed.items[i], i);
 	}
 }
 
