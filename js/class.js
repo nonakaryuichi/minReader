@@ -33,6 +33,9 @@ App.minReader = function(){
                 feedContiner : $("#feedContiner")
 	}
 
+        //select feed
+        this.selectFeed;
+
 	//storage
 	this.storage = new this.model(this.names);
 }
@@ -74,6 +77,13 @@ App.minReader.prototype.controler = function(){
 			alert("URL Error");
 		}
 	});
+
+
+        //key event
+        $(window).keydown(function(e){
+                console.log(e.keyCode);
+                return false;
+        });
 }
 
 
@@ -209,7 +219,10 @@ App.minReader.prototype.addFeedList = function(url, title, num){
 			.append(
 				$("<a>")
 					.addClass("selector")
-					.attr("href", "javascript:void(0)")
+					.attr({
+                                                "href":"javascript:void(0)",
+                                                "id":""
+                                        })
 					.data("feedlink", url)
                                         .append(
                                                 $("<span>")

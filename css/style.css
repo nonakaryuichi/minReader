@@ -49,6 +49,7 @@ html
 
 #continer
 {
+        overflow:hidden;
         margin:0 auto;
 }
         #continer #feedList
@@ -300,8 +301,10 @@ html
                         }
         #continer #feedContiner
         {
+                overflow:hidden;
                 position:absolute;
 		top:0;
+                bottom:0;
 		left:280px;
 		right:120px;
                 padding:0 0 120px 0;
