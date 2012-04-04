@@ -29,9 +29,14 @@ App.minReader = function(){
 
 	//dom
 	this.$ = {
-		feedList : $("#feedList"),
-                feedContiner : $("#feedContiner")
+		feedList       : $("#feedList"),
+                feedContiner   : $("#feedContiner"),
+		curentListItem : '',
+		curentFeedItem : ''
 	}
+
+	//mode
+	this.mode = 'list';
 
         //select feed
         this.selectFeed;
@@ -81,7 +86,44 @@ App.minReader.prototype.controler = function(){
 
         //key event
         $(window).keydown(function(e){
-                console.log(e.keyCode);
+		switch (e.keyCode) {
+			//left key
+			case 37:
+				method.selectMode(37);
+			break;
+
+			//right key
+			case 39:
+				method.selectMode(39);
+				method.$.curentFeedItem = '';
+			break;
+
+			//up
+			case 38:
+				switch (method.mode){
+					case "list":
+						method.listMode(38);
+					break;
+
+					case "feeds":
+						method.feedMode(38);
+					break;
+				}
+			break;
+
+			//down
+			case 40:
+				switch (method.mode){
+					case "list":
+						method.listMode(40);
+					break;
+
+					case "feeds":
+						method.feedMode(40);
+					break;
+				}
+			break;
+		}
                 return false;
         });
 }
@@ -238,6 +280,7 @@ App.minReader.prototype.addFeedList = function(url, title, num){
 				
 	);
 }
+
 
 //view List
 App.minReader.prototype.viewFeedList = function(){
@@ -411,6 +454,134 @@ App.minReader.prototype.viewFeeds = function(feedURL){
 	for (var i = 0; i < feed.items.length; i++) {
                 method.viewFeed(feed.items[i], i);
 	}
+}
+
+
+App.minReader.prototype.selectMode = function(keycode) {
+	var method = this;
+
+	//action
+	switch (keycode) {
+		case 37:
+			method.mode = 'list';
+		break;
+
+		case 39:
+			method.mode = 'feeds';
+			method.viewFeeds(method.$.curentListItem.find('.selector').data('feedlink'));
+		break;
+	}
+}
+
+App.minReader.prototype.feedMode = function(keycode) {
+	var method = this;
+
+	//action
+	switch (keycode) {
+		case 38:
+			method.animateFeed('prev');
+		break;
+
+		case 40:
+			method.animateFeed('next');
+		break;
+	}
+}
+
+App.minReader.prototype.listMode = function(keycode) {
+	var method = this;
+
+	//action
+	switch (keycode) {
+		case 38:
+			method.animateList('prev');
+		break;
+
+		case 40:
+			method.animateList('next');
+		break;
+	}
+}
+
+
+App.minReader.prototype.animateList = function(mode) {
+	var method = this;
+	var $targets = method.$.feedList.find(".item");
+
+	switch (mode){
+		case 'next':
+			if(!method.$.curentListItem.length){
+				method.$.curentListItem = $targets.eq(1);
+			} else {
+				if(method.$.curentListItem.next().length){
+					method.$.curentListItem = method.$.curentListItem.next('.item');
+				} else {
+					method.$.curentListItem = $targets.eq(0);
+				}
+			}
+		break;
+
+		case 'prev':
+			if(!method.$.curentListItem.length){
+				method.$.curentListItem = $targets.eq(0);
+			} else {
+				if(method.$.curentListItem.prev().length){
+					method.$.curentListItem = method.$.curentListItem.prev('.item');
+				} else {
+					method.$.curentListItem = $targets.eq(-1);
+				}
+			}
+		break;
+	}
+	
+	var margin = method.$.curentListItem.position().top;
+	method.$.feedList.stop().animate({
+		marginTop : (0 - margin)
+	},
+	{
+		duration:300
+	});
+}
+
+
+
+App.minReader.prototype.animateFeed = function(mode) {
+	var method = this;
+	var $targets = method.$.feedContiner.find(".article");
+
+	switch (mode){
+		case 'next':
+			if(!method.$.curentFeedItem.length){
+				method.$.curentFeedItem = $targets.eq(1);
+			} else {
+				if(method.$.curentFeedItem.next().length){
+					method.$.curentFeedItem = method.$.curentFeedItem.next('.article');
+				} else {
+					method.$.curentFeedItem = $targets.eq(0);
+				}
+			}
+		break;
+
+		case 'prev':
+			if(!method.$.curentFeedItem.length){
+				method.$.curentFeedItem = $targets.eq(0);
+			} else {
+				if(method.$.curentFeedItem.prev().length){
+					method.$.curentFeedItem = method.$.curentFeedItem.prev('.article');
+				} else {
+					method.$.curentFeedItem = $targets.eq(-1);
+				}
+			}
+		break;
+	}
+	
+	var margin = method.$.curentFeedItem.position().top;
+	method.$.feedContiner.stop().animate({
+		marginTop : (0 - margin - 100)
+	},
+	{
+		duration:300
+	});
 }
 
 
