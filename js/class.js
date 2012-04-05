@@ -89,13 +89,14 @@ App.minReader.prototype.controler = function(){
 		switch (e.keyCode) {
 			//left key
 			case 37:
-				method.selectMode(37);
+				method.mode = 'list';
+				method.selectMode();
 			break;
 
 			//right key
 			case 39:
-				method.selectMode(39);
-				method.$.curentFeedItem = '';
+				method.mode = 'feed';
+				method.selectMode();
 			break;
 
 			//up
@@ -105,7 +106,7 @@ App.minReader.prototype.controler = function(){
 						method.listMode(38);
 					break;
 
-					case "feeds":
+					case "feed":
 						method.feedMode(38);
 					break;
 				}
@@ -118,7 +119,7 @@ App.minReader.prototype.controler = function(){
 						method.listMode(40);
 					break;
 
-					case "feeds":
+					case "feed":
 						method.feedMode(40);
 					break;
 				}
@@ -457,17 +458,16 @@ App.minReader.prototype.viewFeeds = function(feedURL){
 }
 
 
-App.minReader.prototype.selectMode = function(keycode) {
+App.minReader.prototype.selectMode = function() {
 	var method = this;
 
 	//action
-	switch (keycode) {
-		case 37:
-			method.mode = 'list';
+	switch (method.mode) {
+		case 'list':
+			method.$.curentListItem.addClass('curent');
 		break;
 
-		case 39:
-			method.mode = 'feeds';
+		case 'feed':
 			method.viewFeeds(method.$.curentListItem.find('.selector').data('feedlink'));
 		break;
 	}
